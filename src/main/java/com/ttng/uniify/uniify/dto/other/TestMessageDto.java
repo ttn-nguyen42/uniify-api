@@ -1,4 +1,4 @@
-package com.ttng.uniify.uniify.dto.response;
+package com.ttng.uniify.uniify.dto.other;
 
 public class TestMessageDto {
     private String message;
