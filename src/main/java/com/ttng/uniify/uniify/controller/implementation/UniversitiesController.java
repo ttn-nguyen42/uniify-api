@@ -7,11 +7,26 @@ import com.ttng.uniify.uniify.dto.request.UniversityCreationDto;
 import com.ttng.uniify.uniify.dto.response.*;
 import com.ttng.uniify.uniify.entity.InformationEntity;
 import com.ttng.uniify.uniify.entity.UniversityEntity;
+import com.ttng.uniify.uniify.service.CategoriesService;
+import com.ttng.uniify.uniify.service.CoursesService;
+import com.ttng.uniify.uniify.service.UniversitiesService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class UniversitiesController implements UniversitiesApi {
+
+    private UniversitiesService universitiesService;
+    private CoursesService coursesService;
+    private CategoriesService categoriesService;
+
+    @Autowired
+    public UniversitiesController(UniversitiesService universitiesService, CoursesService coursesService, CategoriesService categoriesService) {
+        this.universitiesService = universitiesService;
+        this.coursesService = coursesService;
+        this.categoriesService = categoriesService;
+    }
 
     @Override
     public ResponseEntity<UniversityEntity> getAllUniversities(String category) {
