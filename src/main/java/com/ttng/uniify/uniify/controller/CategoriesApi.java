@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
+
 @RequestMapping("/api/v1/categories")
 public interface CategoriesApi {
     @GetMapping
     ResponseEntity<CategoryListDto> getAllCategories();
 
     @PostMapping
-    ResponseEntity<CategoryIdDto> addCategory(@RequestBody CategoryCreationDto newCategory);
+    ResponseEntity<CategoryIdDto> addCategory(@RequestBody @Valid CategoryCreationDto newCategory);
 }

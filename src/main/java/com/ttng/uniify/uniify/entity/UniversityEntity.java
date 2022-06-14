@@ -37,6 +37,12 @@ public class UniversityEntity {
     @OneToMany(mappedBy = "university", cascade = CascadeType.ALL)
     private List<ProgramEntity> programs = new ArrayList<>();
 
+    public UniversityEntity(String name, String location, String code) {
+        this.name = name;
+        this.location = location;
+        this.code = code;
+    }
+
     public void addProgram(ProgramEntity program) {
         this.programs.add(program);
     }

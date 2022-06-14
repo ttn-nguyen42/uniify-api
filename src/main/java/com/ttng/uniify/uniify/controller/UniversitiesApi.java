@@ -1,5 +1,6 @@
 package com.ttng.uniify.uniify.controller;
 
+import com.ttng.uniify.uniify.dto.other.SuccessMessage;
 import com.ttng.uniify.uniify.dto.request.CategoryAdditionDto;
 import com.ttng.uniify.uniify.dto.request.CategoryCreationDto;
 import com.ttng.uniify.uniify.dto.request.ProgramCreationDto;
@@ -10,13 +11,15 @@ import com.ttng.uniify.uniify.entity.UniversityEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RequestMapping("/api/v1/universities")
 public interface UniversitiesApi {
     @GetMapping
-    ResponseEntity<UniversityEntity> getAllUniversities(@RequestParam(required = false) String category);
+    ResponseEntity<UniversityListDto> getAllUniversities(@RequestParam(required = false) String category);
 
     @PostMapping
-    ResponseEntity<CategoryIdDto> addUniversity(@RequestBody UniversityCreationDto newUniversity);
+    ResponseEntity<UniversityIdDto> addUniversity(@RequestBody UniversityCreationDto newUniversity);
 
     @GetMapping("/{id}")
     ResponseEntity<UniversityEntity> getUniversityById(@PathVariable String id);
@@ -25,7 +28,7 @@ public interface UniversitiesApi {
     ResponseEntity<CategoryListDto> getCategoriesById(@PathVariable String id);
 
     @PostMapping("/{id}/categories")
-    void addCategoryToUniversityById(@PathVariable String id, @RequestBody CategoryAdditionDto newCategory);
+    ResponseEntity<SuccessMessage> addCategoryToUniversityById(@PathVariable String id, @RequestBody @Valid CategoryAdditionDto newCategory);
 
     @GetMapping("/{id}/information")
     ResponseEntity<InformationEntity> getInformationById(@PathVariable String id);
@@ -37,5 +40,5 @@ public interface UniversitiesApi {
     ResponseEntity<ProgramListDto> getProgramsById(@PathVariable String id);
 
     @PostMapping("/{id}/programs")
-    ResponseEntity<ProgramIdDto> addProgramById(@PathVariable String id, @RequestBody ProgramCreationDto newProgram);
+    ResponseEntity<ProgramIdDto> addProgramById(@PathVariable String id, @RequestBody @Valid ProgramCreationDto newProgram);
 }

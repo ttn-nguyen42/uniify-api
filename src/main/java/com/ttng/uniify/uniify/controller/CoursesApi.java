@@ -6,11 +6,13 @@ import com.ttng.uniify.uniify.dto.response.CourseListDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RequestMapping("/courses")
 public interface CoursesApi {
     @GetMapping("/{programId}")
     ResponseEntity<CourseListDto> getCoursesByProgramId(@PathVariable String programId);
 
     @PostMapping("/{programId}")
-    ResponseEntity<CourseIdDto> addCourseByProgramId(@PathVariable String programId, @RequestBody CourseCreationDto newCourse);
+    ResponseEntity<CourseIdDto> addCourseByProgramId(@PathVariable String programId, @RequestBody @Valid CourseCreationDto newCourse);
 }

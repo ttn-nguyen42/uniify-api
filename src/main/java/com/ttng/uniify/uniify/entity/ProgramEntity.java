@@ -13,7 +13,7 @@ public class ProgramEntity {
     @Id
     @GeneratedValue
     @Column(nullable = false, updatable = false)
-    private String id;
+    private Long id;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -36,11 +36,11 @@ public class ProgramEntity {
         this.courses.add(course);
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

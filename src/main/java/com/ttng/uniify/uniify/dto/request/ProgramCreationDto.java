@@ -1,7 +1,11 @@
 package com.ttng.uniify.uniify.dto.request;
 
+import javax.validation.constraints.NotEmpty;
+
 public class ProgramCreationDto {
+    @NotEmpty(message = "Program name must not be empty")
     private String name;
+
     private Float averageFee;
 
     public String getName() {

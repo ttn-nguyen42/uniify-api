@@ -1,8 +1,12 @@
 package com.ttng.uniify.uniify.dto.request;
 
+import javax.validation.constraints.NotEmpty;
+
 public class UniversityCreationDto {
+    @NotEmpty(message = "University name must not be empty")
     private String name;
     private String location;
+    @NotEmpty(message = "University code must not be empty")
     private String code;
 
     public String getName() {

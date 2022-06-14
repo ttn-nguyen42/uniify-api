@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -25,24 +26,35 @@ public class RestApiErrorHandler extends Utils {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ExceptionResponse> handleGeneralException(Exception e, HttpServletRequest req) {
         ExceptionResponse res = exceptionResponseBuilder(e, HttpStatus.INTERNAL_SERVER_ERROR, req);
+        log.error(e.getMessage());
         return new ResponseEntity<>(res, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(BadArgumentException.class)
     public ResponseEntity<ExceptionResponse> handleBadArgumentException(BadArgumentException e, HttpServletRequest req) {
         ExceptionResponse res = exceptionResponseBuilder(e, e.getStatus(), req);
+        log.error(e.getMessage());
         return new ResponseEntity<>(res, e.getStatus());
     }
 
     @ExceptionHandler(ConflictInformationException.class)
     public ResponseEntity<ExceptionResponse> handleConflictException(ConflictInformationException e, HttpServletRequest req) {
         ExceptionResponse res = exceptionResponseBuilder(e, e.getStatus(), req);
+        log.error(e.getMessage());
         return new ResponseEntity<>(res, e.getStatus());
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ExceptionResponse> handleResourceException(ResourceNotFoundException e, HttpServletRequest req) {
         ExceptionResponse res = exceptionResponseBuilder(e, e.getStatus(), req);
+        log.error(e.getMessage());
         return new ResponseEntity<>(res, e.getStatus());
+    }
+
+    @ExceptionHandler(BindException.class)
+    public ResponseEntity<ExceptionResponse> handleDtoValidationException(BindException e, HttpServletRequest req) {
+        ExceptionResponse res = exceptionResponseBuilder(e, HttpStatus.BAD_REQUEST, req);
+        log.error(e.getMessage());
+        return new ResponseEntity<>(res, HttpStatus.BAD_REQUEST);
     }
 }

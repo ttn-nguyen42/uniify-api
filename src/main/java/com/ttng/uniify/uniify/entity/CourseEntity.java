@@ -28,6 +28,11 @@ public class CourseEntity {
     @JsonIgnore
     private ProgramEntity program;
 
+    public CourseEntity(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     public Long getId() {
         return id;
     }

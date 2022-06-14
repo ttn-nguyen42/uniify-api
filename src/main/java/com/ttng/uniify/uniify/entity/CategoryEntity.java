@@ -25,6 +25,11 @@ public class CategoryEntity {
     @JsonIgnore
     private List<UniversityEntity> universities = new ArrayList<>();
 
+    public CategoryEntity(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     public void addUniversity(UniversityEntity university) {
         universities.add(university);
     }
