@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table
+@Table(name = "category")
 public class CategoryEntity {
     @Id
     @GeneratedValue
@@ -28,6 +28,10 @@ public class CategoryEntity {
     public CategoryEntity(String name, String description) {
         this.name = name;
         this.description = description;
+    }
+
+    public CategoryEntity() {
+
     }
 
     public void addUniversity(UniversityEntity university) {

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table
+@Table(name = "program")
 public class ProgramEntity {
     @Id
     @GeneratedValue
@@ -31,6 +31,11 @@ public class ProgramEntity {
     @JoinColumn(nullable = false)
     @JsonIgnore
     private UniversityEntity university;
+
+    public ProgramEntity(String name, Float averageFee) {
+        this.name = name;
+        this.averageFee = averageFee;
+    }
 
     public void addCourse(CourseEntity course) {
         this.courses.add(course);

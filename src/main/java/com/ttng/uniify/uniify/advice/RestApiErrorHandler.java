@@ -25,35 +25,35 @@ public class RestApiErrorHandler extends Utils {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ExceptionResponse> handleGeneralException(Exception e, HttpServletRequest req) {
-        ExceptionResponse res = exceptionResponseBuilder(e, HttpStatus.INTERNAL_SERVER_ERROR, req);
+        ExceptionResponse res = exceptionResponseBuilder("", HttpStatus.INTERNAL_SERVER_ERROR, req);
         log.error(e.getMessage());
         return new ResponseEntity<>(res, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(BadArgumentException.class)
     public ResponseEntity<ExceptionResponse> handleBadArgumentException(BadArgumentException e, HttpServletRequest req) {
-        ExceptionResponse res = exceptionResponseBuilder(e, e.getStatus(), req);
+        ExceptionResponse res = exceptionResponseBuilder(e.getMessage(), e.getStatus(), req);
         log.error(e.getMessage());
         return new ResponseEntity<>(res, e.getStatus());
     }
 
     @ExceptionHandler(ConflictInformationException.class)
     public ResponseEntity<ExceptionResponse> handleConflictException(ConflictInformationException e, HttpServletRequest req) {
-        ExceptionResponse res = exceptionResponseBuilder(e, e.getStatus(), req);
+        ExceptionResponse res = exceptionResponseBuilder(e.getMessage(), e.getStatus(), req);
         log.error(e.getMessage());
         return new ResponseEntity<>(res, e.getStatus());
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ExceptionResponse> handleResourceException(ResourceNotFoundException e, HttpServletRequest req) {
-        ExceptionResponse res = exceptionResponseBuilder(e, e.getStatus(), req);
+        ExceptionResponse res = exceptionResponseBuilder(e.getMessage(), e.getStatus(), req);
         log.error(e.getMessage());
         return new ResponseEntity<>(res, e.getStatus());
     }
 
     @ExceptionHandler(BindException.class)
     public ResponseEntity<ExceptionResponse> handleDtoValidationException(BindException e, HttpServletRequest req) {
-        ExceptionResponse res = exceptionResponseBuilder(e, HttpStatus.BAD_REQUEST, req);
+        ExceptionResponse res = exceptionResponseBuilder(e.getBindingResult().getAllErrors().get(0).getDefaultMessage(), HttpStatus.BAD_REQUEST, req);
         log.error(e.getMessage());
         return new ResponseEntity<>(res, HttpStatus.BAD_REQUEST);
     }

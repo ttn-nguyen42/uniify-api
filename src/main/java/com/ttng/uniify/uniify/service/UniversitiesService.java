@@ -1,5 +1,6 @@
 package com.ttng.uniify.uniify.service;
 
+import com.ttng.uniify.uniify.dto.request.InformationCreationDto;
 import com.ttng.uniify.uniify.dto.request.ProgramCreationDto;
 import com.ttng.uniify.uniify.dto.request.UniversityCreationDto;
 import com.ttng.uniify.uniify.entity.CategoryEntity;
@@ -15,13 +16,11 @@ public interface UniversitiesService {
 
     UniversityEntity getUniversityById(String id);
 
-    List<CategoryEntity> getCategoriesById(String id);
-
-    void addCategoryToUniversityById(String universityId, Long categoryId);
+    void addCategoryToUniversityById(String universityId, String categoryId);
 
     InformationEntity getInformationById(String id);
 
-    UniversityEntity addInformationById(String id);
+    UniversityEntity addInformationById(String id, InformationCreationDto program);
 
     List<ProgramEntity> getProgramsById(String id);
 

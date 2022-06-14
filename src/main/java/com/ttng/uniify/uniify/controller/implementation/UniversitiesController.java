@@ -3,6 +3,7 @@ package com.ttng.uniify.uniify.controller.implementation;
 import com.ttng.uniify.uniify.controller.UniversitiesApi;
 import com.ttng.uniify.uniify.dto.other.SuccessMessage;
 import com.ttng.uniify.uniify.dto.request.CategoryAdditionDto;
+import com.ttng.uniify.uniify.dto.request.InformationCreationDto;
 import com.ttng.uniify.uniify.dto.request.ProgramCreationDto;
 import com.ttng.uniify.uniify.dto.request.UniversityCreationDto;
 import com.ttng.uniify.uniify.dto.response.*;
@@ -24,9 +25,12 @@ public class UniversitiesController implements UniversitiesApi {
 
     private final UniversitiesService service;
 
+    private final CategoriesService cService;
+
     @Autowired
-    public UniversitiesController(UniversitiesService service) {
+    public UniversitiesController(UniversitiesService service, CategoriesService cService) {
         this.service = service;
+        this.cService = cService;
     }
 
     @Override
@@ -52,17 +56,15 @@ public class UniversitiesController implements UniversitiesApi {
     }
 
     @Override
-    public ResponseEntity<CategoryListDto> getCategoriesById(String id) {
-        List<CategoryEntity> entities = service.getCategoriesById(id);
-        CategoryListDto dto = new CategoryListDto();
-        dto.setCategories(entities);
-        return ResponseEntity.ok(dto);
+    public ResponseEntity<CategoryEntity> getCategoryById(String id) {
+        CategoryEntity entity = cService.getCategoryById(id);
+        return ResponseEntity.ok(entity);
     }
 
     @Override
     public ResponseEntity<SuccessMessage> addCategoryToUniversityById(String id, CategoryAdditionDto newCategory) {
         Long categoryId = newCategory.getCategoryId();
-        service.addCategoryToUniversityById(id, categoryId);
+        service.addCategoryToUniversityById(id, categoryId.toString());
         return ResponseEntity.ok(new SuccessMessage());
     }
 
@@ -73,8 +75,8 @@ public class UniversitiesController implements UniversitiesApi {
     }
 
     @Override
-    public ResponseEntity<UniversityIdDto> addInformationById(String id) {
-        UniversityEntity university = service.addInformationById(id);
+    public ResponseEntity<UniversityIdDto> addInformationById(String id, InformationCreationDto information) {
+        UniversityEntity university = service.addInformationById(id, information);
         UniversityIdDto dto = new UniversityIdDto();
         dto.setUniversityId(university.getId());
         return ResponseEntity.ok(dto);

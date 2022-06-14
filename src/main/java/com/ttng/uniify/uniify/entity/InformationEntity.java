@@ -5,7 +5,7 @@ import net.minidev.json.annotate.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "information")
 public class InformationEntity {
     @Id
     @GeneratedValue
@@ -19,7 +19,7 @@ public class InformationEntity {
     private String phoneNumber;
 
     @Column(name = "number_of_students")
-    private String numberOfStudents;
+    private Long numberOfStudents;
 
     @Column(name = "introduction")
     private String introduction;
@@ -28,6 +28,15 @@ public class InformationEntity {
     @JsonIgnore
     @OneToOne(mappedBy = "information", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private UniversityEntity university;
+
+    public InformationEntity() {}
+
+    public InformationEntity(String email, String phoneNumber, Long numberOfStudents, String introduction) {
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.numberOfStudents = numberOfStudents;
+        this.introduction = introduction;
+    }
 
     public Long getId() {
         return id;
@@ -53,11 +62,11 @@ public class InformationEntity {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getNumberOfStudents() {
+    public Long getNumberOfStudents() {
         return numberOfStudents;
     }
 
-    public void setNumberOfStudents(String numberOfStudents) {
+    public void setNumberOfStudents(Long numberOfStudents) {
         this.numberOfStudents = numberOfStudents;
     }
 

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table
+@Table(name = "university")
 public class UniversityEntity {
     @Id
     @GeneratedValue
@@ -41,6 +41,10 @@ public class UniversityEntity {
         this.name = name;
         this.location = location;
         this.code = code;
+    }
+
+    public UniversityEntity() {
+
     }
 
     public void addProgram(ProgramEntity program) {

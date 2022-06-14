@@ -5,7 +5,7 @@ import net.minidev.json.annotate.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "course")
 public class CourseEntity {
     @Id
     @GeneratedValue
@@ -28,9 +28,14 @@ public class CourseEntity {
     @JsonIgnore
     private ProgramEntity program;
 
-    public CourseEntity(String name, String description) {
+    public CourseEntity(String name, String description, Float averageScore) {
         this.name = name;
         this.description = description;
+        this.averageScore = averageScore;
+    }
+
+    public CourseEntity() {
+
     }
 
     public Long getId() {

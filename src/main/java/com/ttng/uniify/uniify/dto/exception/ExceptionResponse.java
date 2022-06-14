@@ -53,9 +53,9 @@ public class ExceptionResponse {
         this.path = path;
     }
 
-    public ExceptionResponse(Exception e, HttpStatus status, HttpServletRequest req, String timestamp) {
+    public ExceptionResponse(String message, HttpStatus status, HttpServletRequest req, String timestamp) {
         setError(status.getReasonPhrase());
-        setMessage(e.getMessage());
+        setMessage(message);
         setPath(req.getRequestURI());
         setStatus(status.value());
         setTimestamp(timestamp);
